@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quickpays - Simple Payments</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f3f6fc;
+  color: #17233d;
+}
+
+header {
+  background: #101d38;
+  color: white;
+  padding: 23px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.brand-icon {
+  background: #3565f5;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+.brand h2 {
+  font-size: 21px;
+}
+
+.brand p {
+  font-size: 11px;
+  color: #aab8d1;
+  margin-top: 4px;
+}
+
+.status {
+  font-size: 11px;
+  background: #1d3153;
+  padding: 8px 11px;
+  border-radius: 20px;
+  color: #b8c9f0;
+}
+
+main {
+  max-width: 460px;
+  margin: 45px auto;
+  padding: 18px;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 27px;
+}
+
+.heading h1 {
+  font-size: 28px;
+  margin-bottom: 9px;
+}
+
+.heading p {
+  color: #7c879b;
+  font-size: 14px;
+}
+
+.card {
+  background: white;
+  padding: 28px 23px;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(25,40,80,0.07);
+}
+
+.icon {
+  width: 65px;
+  height: 65px;
+  background: #eaf0ff;
+  color: #3565f5;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
+
+.card h2 {
+  text-align: center;
+  font-size: 23px;
+}
+
+.sub {
+  text-align: center;
+  color: #8791a3;
+  font-size: 13px;
+  margin-top: 9px;
+  margin-bottom: 28px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 18px 0 9px;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #dce2ed;
+  border-radius: 11px;
+  font-size: 16px;
+  background: #fff;
+  outline: none;
+}
+
+input:focus {
+  border-color: #3565f5;
+}
+
+.amount-box {
+  position: relative;
+}
+
+.amount-box span {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.amount-box input {
+  padding-left: 38px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  padding: 16px;
+  border-radius: 11px;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 23px;
+}
+
+.pay-button {
+  background: #3565f5;
+  color: white;
+}
+
+.pay-button:active {
+  background: #254dcc;
+}
+
+.message {
+  display: none;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 9px;
+  background: #fff1e9;
+  color: #a64a20;
+  font-size: 13px;
+  text-align: center;
+}
+
+.info {
+  margin-top: 22px;
+  text-align: center;
+  color: #8993a4;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.security {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 12px;
+  color: #75849a;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #929bad;
+  font-size: 12px;
+}
+
+footer a {
+  color: #3565f5;
+  text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">Q</div>
+    <div>
+      <h2>Quickpays</h2>
+      <p>Simple payments</p>
+    </div>
+  </div>
+
+  <div class="status">PAYMENT PORTAL</div>
+</header>
+
+<main>
+
+  <div class="heading">
+    <h1>Welcome to Quickpays</h1>
+    <p>Make a UPI payment easily</p>
+  </div>
+
+  <section class="card">
+
+    <div class="icon">₹</div>
+
+    <h2>Make a Payment</h2>
+    <p class="sub">Enter your payment details below</p>
+
+    <label for="amount">Payment Amount</label>
+
+    <div class="amount-box">
+      <span>₹</span>
+      <input
+        type="number"
+        id="amount"
+        placeholder="0.00"
+        min="1"
+        max="100000"
+        step="0.01"
+      >
+    </div>
+
+    <label for="description">Payment Description</label>
+
+    <input
+      type="text"
+      id="description"
+      placeholder="What is this payment for?"
+      maxlength="80"
+    >
+
+    <button class="pay-button" onclick="payNow()">
+      Continue with UPI →
+    </button>
+
+    <div class="message" id="message"></div>
+
+    <p class="info">
+      You will be redirected to a compatible UPI app.
+      Check the recipient name and amount before
+      authorizing any payment.
+    </p>
+
+    <p class="security">
+      🔒 Payments are authorized in your UPI app.
+    </p>
+
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Quickpays. All rights reserved.
+  <br><br>
+  Personal payment page
+</footer>
+
+<script>
+
+// Configure only with an authorized
+// parent/guardian-managed UPI account.
+
+const UPI_ID = "YOUR-UPI-ID";
+const ACCOUNT_NAME = "YOUR DISPLAY NAME";
+
+function payNow() {
+
+  const amount = Number(
+    document.getElementById("amount").value
+  );
+
+  const description =
+    document.getElementById("description").value.trim();
+
+  const message = document.getElementById("message");
+
+  message.style.display = "block";
+
+  if (!Number.isFinite(amount) ||
+      amount < 1 ||
+      amount > 100000) {
+
+    message.textContent =
+      "Please enter a valid amount.";
+
+    return;
+  }
+
+  if (UPI_ID === "YOUR-UPI-ID" ||
+      ACCOUNT_NAME === "YOUR DISPLAY NAME") {
+
+    message.textContent =
+      "UPI account is not configured yet. This is a demo.";
+
+    return;
+  }
+
+  const params = new URLSearchParams({
+    pa: UPI_ID,
+    pn: ACCOUNT_NAME,
+    am: amount.toFixed(2),
+    cu: "INR",
+    tn: description || "Quickpays payment"
+  });
+
+  window.location.href =
+    "upi://pay?" + params.toString();
+}
+
+</script>
+
+</body>
+</html> 
+<br>
+<p style="font-size:10px; color:#a0a8b5; margin-top:8px;">
+  Entire website built by SAHIL BAJPAYEE
+</p>
